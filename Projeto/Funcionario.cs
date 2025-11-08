@@ -1,30 +1,68 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// ============================================================================
+// Ficheiro:    Funcionario.cs
+// Projeto:     Projeto (POO - IPCA 2025/26)
+// Autor:       Tomás Afonso Cerqueira Gomes nº31501
+// Data:        2025-11-13
+// Descrição:   Classe Funcionario.
+// Notas:       Trabalho prático POO – Fase 1.
+// ============================================================================
+
 
 namespace Projeto
 {
     public class Funcionario
     {
-        public string NomeF;
-        public string Funcao;
-        public float Salario; //por hora
+        #region Atributos
+        private string nomeF;
+        private string funcao;
+        private float salario;
+        #endregion
 
-        #region Construtor
-        public Funcionario(string nome, string funcao, float salario)
+        #region Propriedades
+
+        /// <summary>Nome do funcionário.</summary>
+        public string NomeF
         {
-            NomeF = nome;
-            Funcao = funcao;
-            Salario = salario;
+            get { return this.nomeF; }
+            set { this.nomeF = value; }
+        }
+
+        /// <summary>Função ou cargo do funcionário.</summary>
+        public string Funcao
+        {
+            get { return this.funcao; }
+            set { this.funcao = value; }
+        }
+
+        /// <summary>Salário do funcionário por hora.</summary>
+        public float Salario
+        {
+            get { return this.salario; }
+            set { this.salario = value; }
         }
         #endregion
 
-        #region Métodos
-        public double CalcularSalario(int horasTrabalhadas)
+        #region Construtor
+        /// <summary>
+        /// Cria um Funcionario com nome, função e salário.
+        /// </summary>
+        public Funcionario(string nomeF, string funcao, float salario)
         {
-            return Salario * horasTrabalhadas;
+            this.nomeF = nomeF;
+            this.funcao = funcao;
+            this.salario = salario;
+        }
+
+        #endregion
+
+        #region Métodos
+
+        /// <summary>
+        /// Calcula o salário total do funcionário com base no número de horas trabalhadas.
+        /// </summary>
+        public float CalcularSalario(int horasTrabalhadas)
+        {
+            return this.salario * horasTrabalhadas;
         }
         #endregion
 
