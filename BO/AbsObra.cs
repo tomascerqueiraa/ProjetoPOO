@@ -9,7 +9,7 @@
 
 using System;
 
-namespace Projeto
+namespace BO
 {
     /// <summary>
     /// Classe abstrata que representa uma obra de construção civil.
@@ -23,10 +23,6 @@ namespace Projeto
         private string localizacao;
         private DateTime dataInicio;
         private DateTime dataFimPrevisto;
-        //funcionarios;
-        //materiais;
-        //servicos;
-        //orçamentos
         #endregion
 
         #region Propriedades
@@ -70,7 +66,7 @@ namespace Projeto
         #endregion
 
         #region Construtor
-
+        /*
         /// <summary>
         /// Construtor da classe AbsObra.
         /// </summary>
@@ -80,30 +76,31 @@ namespace Projeto
             this.localizacao = localizacao;
             this.dataInicio = dataInicio;
             this.dataFimPrevisto = dataFimPrevisto;
-        }
+        }*/
         #endregion
 
         #region Métodos
+        /*
         /// <summary>
         /// Método que irá adicionar um material à obra
         /// </summary>
-        protected abstract bool AdicionarMaterial();
+        protected abstract bool AdicionarMaterial(Material m);
 
         /// <summary>
         /// Método que irá adicionar um serviço à obra
         /// </summary>
-        protected abstract bool AdicionarServico();
+        protected abstract bool AdicionarServico(Servico s);
 
         /// <summary>
         /// Método que irá adicionar um funcionário à obra
         /// </summary>
-        protected abstract bool AdicionarFuncionario();
+        protected abstract bool AdicionarFuncionario(Funcionario f);
 
         /// <summary>
         ///  Método que irá adicionar um orcamento à obra
         /// </summary>
-        protected abstract bool AdicionarOrcamento();
-
+        protected abstract bool AdicionarOrcamento(AbsOrcamento o);
+        */
         #endregion
     }
 }

@@ -1,17 +1,13 @@
-﻿// ============================================================================
-// Ficheiro:    AbsOrcamento.cs
-// Projeto:     Projeto (POO - IPCA 2025/26)
-// Autor:       Tomás Afonso Cerqueira Gomes nº31501
-// Data:        2025-11-13
-// Descrição:   Classe AbsOrcamento.
-// Notas:       Trabalho prático POO – Fase 1.
-// ============================================================================
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
 
-using System;
-
-namespace Projeto
+namespace BO
 {
-    public abstract class AbsOrcamento
+    public class Orcamento
     {
         #region Atributos
         private string codigo;
@@ -20,9 +16,9 @@ namespace Projeto
         private float custoServicos;
         private float custoMaoDeObra;
         private float custoTotal;
-        //materiais;
-        //servicos;
-        //funcionarios;
+        public List<Material> listaMateriais;
+        public List<Servico> listaServicos;
+        public List<Funcionario> listaFuncionarios;
         #endregion
 
         #region Propriedades
@@ -81,38 +77,6 @@ namespace Projeto
             set { this.custoTotal = value; }
         }
         #endregion
-
-        #region Construtor
-        /// <summary>
-        /// Cria um Orçamento com codigo, custo dos materiais, custo de serviços, custo de mão de obra e o custo total.
-        /// </summary>
-        protected AbsOrcamento(string codigo, float custoMateriais, float custoServicos, float custoMaoDeObra)
-        {
-            this.codigo = codigo;
-            this.dataCriacao = DateTime.Now;
-
-            this.custoMateriais = custoMateriais;
-            this.custoServicos = custoServicos;
-            this.custoMaoDeObra = custoMaoDeObra;
-            this.custoTotal = custoMaoDeObra + custoServicos + custoMateriais;
-        }
-        #endregion
-
-        #region Métodos
-        /// <summary>
-        /// Método que irá adicionar um material à obra
-        /// </summary>
-        protected abstract bool AdicionarMaterial();
-
-        /// <summary>
-        /// Método que irá adicionar um serviço à obra
-        /// </summary>
-        protected abstract bool AdicionarServico();
-
-        /// <summary>
-        /// Método que irá adicionar um funcionário à obra
-        /// </summary>
-        protected abstract bool AdicionarFuncionario();
-        #endregion
+    
     }
 }

@@ -9,7 +9,7 @@
 
 using System;
 
-namespace Projeto
+namespace GestaoObrasLib
 {
     public abstract class AbsOrcamento
     {
@@ -102,17 +102,17 @@ namespace Projeto
         /// <summary>
         /// Método que irá adicionar um material à obra
         /// </summary>
-        protected abstract bool AdicionarMaterial();
+        protected abstract bool AdicionarMaterial(Material M);
 
         /// <summary>
         /// Método que irá adicionar um serviço à obra
         /// </summary>
-        protected abstract bool AdicionarServico();
+        protected abstract bool AdicionarServico(Servico s);
 
         /// <summary>
         /// Método que irá adicionar um funcionário à obra
         /// </summary>
-        protected abstract bool AdicionarFuncionario();
+        protected abstract bool AdicionarFuncionario(Funcionario f);
         #endregion
     }
 }

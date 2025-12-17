@@ -7,7 +7,7 @@
 // Notas:       Trabalho prático POO – Fase 1.
 // ============================================================================
 
-namespace Projeto
+namespace GestaoObrasLib
 {
     public class Material
     {

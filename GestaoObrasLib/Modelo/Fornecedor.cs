@@ -9,7 +9,7 @@
 
 using System;
 
-namespace Projeto
+namespace GestaoObrasLib
 {
     public class Fornecedor
     {
@@ -19,7 +19,6 @@ namespace Projeto
         private string nome;
         private string descricao;
         private string contacto;
-        //materiais
         #endregion
 
         #region Propriedades
