@@ -1,11 +1,10 @@
-﻿// ============================================================================
-// Ficheiro:    AbsObra.cs
-// Projeto:     Projeto (POO - IPCA 2025/26)
-// Autor:       Tomás Afonso Cerqueira Gomes nº31501
-// Data:        2025-11-13
-// Descrição:   Modelo abstrato de uma Obra.
-// Notas:       Trabalho prático POO – Fase 1.
-// ============================================================================
+﻿/// ============================================================================
+/// Ficheiro:    AbsObra.cs
+/// Projeto:     Projeto (POO - IPCA 2025/26)
+/// Autor:       Tomás Afonso Cerqueira Gomes nº31501
+/// Data:        2025-12-27
+/// Notas:       Trabalho prático POO – Fase 2.
+/// ============================================================================
 
 using System;
 
@@ -66,7 +65,7 @@ namespace BO
         #endregion
 
         #region Construtor
-        /*
+        
         /// <summary>
         /// Construtor da classe AbsObra.
         /// </summary>
@@ -76,31 +75,31 @@ namespace BO
             this.localizacao = localizacao;
             this.dataInicio = dataInicio;
             this.dataFimPrevisto = dataFimPrevisto;
-        }*/
+        }
         #endregion
 
         #region Métodos
-        /*
+        
         /// <summary>
         /// Método que irá adicionar um material à obra
         /// </summary>
-        protected abstract bool AdicionarMaterial(Material m);
+        public abstract bool AdicionarMaterial(Material m);
 
         /// <summary>
         /// Método que irá adicionar um serviço à obra
         /// </summary>
-        protected abstract bool AdicionarServico(Servico s);
+        public abstract bool AdicionarServico(Servico s);
 
         /// <summary>
         /// Método que irá adicionar um funcionário à obra
         /// </summary>
-        protected abstract bool AdicionarFuncionario(Funcionario f);
+        public abstract bool AdicionarFuncionario(Funcionario f);
 
         /// <summary>
         ///  Método que irá adicionar um orcamento à obra
         /// </summary>
-        protected abstract bool AdicionarOrcamento(AbsOrcamento o);
-        */
+        //protected abstract bool AdicionarOrcamento(AbsOrcamento o);
+        
         #endregion
     }
 }

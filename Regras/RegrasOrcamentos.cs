@@ -1,14 +1,31 @@
-﻿using System;
+﻿/// ============================================================================
+/// Ficheiro:    RegrasOrcamentos.cs
+/// Projeto:     Projeto (POO - IPCA 2025/26)
+/// Autor:       Tomás Afonso Cerqueira Gomes nº31501
+/// Data:        2025-12-27
+/// Notas:       Trabalho prático POO – Fase 2.
+/// ============================================================================
+
+using System;
 using BO;
 using Dados;
 
 namespace Regras
 {
+    /// <summary>
+    /// Classe responsável pela implementação das regras de negócio relativas aos Orçamentos.
+    /// Garante que os orçamentos cumprem os requisitos (como ter código e valores válidos) antes de serem registados.
+    /// </summary>
     public static class RegrasOrcamentos
     {
         /// <summary>
-        /// Valida e regista um orçamento.
+        /// Valida os dados de um orçamento e, se corretos, submete-o para registo na camada de Dados.
         /// </summary>
+        /// <param name="o">O objeto Orçamento a validar.</param>
+        /// <returns>
+        /// Retorna <c>true</c> se o orçamento for registado com sucesso;
+        /// Retorna <c>false</c> se o objeto fornecido for nulo.
+        /// </returns>
         public static bool NovoOrcamento(Orcamento o)
         {
             if (o == null) return false;
@@ -25,7 +42,7 @@ namespace Regras
                 throw new Exception("ERRO: O valor total do orçamento não pode ser negativo.");
             }
 
-            // Regra 3: Valida a data (opcional, mas boa prática)
+            // Regra 3: Valida a data
             if (o.DataCriacao == DateTime.MinValue)
             {
                 // Se a data não foi preenchida, atribuímos a data de hoje automaticamente
@@ -36,6 +53,11 @@ namespace Regras
             return Orcamentos.AdicionarOrcamento(o);
         }
 
+        /// <summary>
+        /// Solicita a gravação da lista de orçamentos em ficheiro.
+        /// </summary>
+        /// <param name="caminho">O caminho ou nome do ficheiro de destino.</param>
+        /// <returns>Retorna <c>true</c> se a operação for bem-sucedida.</returns>
         public static bool Gravar(string caminho)
         {
             return Orcamentos.GravarFicheiro(caminho);

@@ -1,25 +1,50 @@
-﻿using System;
+﻿/// ============================================================================
+/// Ficheiro:    Funcionarios.cs
+/// Projeto:     Projeto (POO - IPCA 2025/26)
+/// Autor:       Tomás Afonso Cerqueira Gomes nº31501
+/// Data:        2025-12-27
+/// Notas:       Trabalho prático POO – Fase 2.
+/// ============================================================================
+
+using BO;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
-using BO;
+using static Exceptions.FicheiroExcecoes;
 
 namespace Dados
 {
+    /// <summary>
+    /// Classe responsável pela gestão e persistência dos dados dos Funcionários.
+    /// Gere a lista de colaboradores da empresa e permite a gravação em ficheiro.
+    /// </summary>
     [Serializable]
     public class Funcionarios
     {
         private static List<Funcionario> listaFuncionarios;
 
+        #region Construtores
+        /// <summary>
+        /// Construtor estático da classe Funcionarios.
+        /// Inicializa a lista de funcionários antes de qualquer utilização.
+        /// </summary>
         static Funcionarios()
         {
             listaFuncionarios = new List<Funcionario>();
         }
+        #endregion
 
-        // Adicionar um novo funcionário
+        #region Métodos
+
+        /// <summary>
+        /// Adiciona um novo funcionário à lista de colaboradores.
+        /// </summary>
+        /// <param name="f">Objeto do tipo Funcionario a adicionar.</param>
+        /// <returns>
+        /// Retorna <c>true</c> se o funcionário for inserido com sucesso;
+        /// Retorna <c>false</c> se o objeto fornecido for nulo.
+        /// </returns>
         public static bool AdicionarFuncionario(Funcionario f)
         {
             if (f == null) return false;
@@ -28,7 +53,14 @@ namespace Dados
             return true;
         }
 
-        // Gravar a lista de funcionários em ficheiro
+        /// <summary>
+        /// Grava a lista atual de funcionários num ficheiro binário.
+        /// </summary>
+        /// <param name="caminho">Caminho ou nome do ficheiro de destino (ex: "funcionarios.bin").</param>
+        /// <returns>Retorna <c>true</c> se a operação for concluída com sucesso.</returns>
+        /// <exception cref="FicheiroException">
+        /// Lançada quando ocorre um erro de gravação (permissões, disco cheio, etc.) ou serialização.
+        /// </exception>
         public static bool GravarFicheiro(string caminho)
         {
             try
@@ -39,10 +71,11 @@ namespace Dados
                 stream.Close();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return false;
+                throw new FicheiroException("Não foi possível gravar", e);
             }
         }
+        #endregion
     }
 }

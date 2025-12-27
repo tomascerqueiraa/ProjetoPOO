@@ -1,35 +1,68 @@
-﻿using BO;
+﻿/// ============================================================================
+/// Ficheiro:    Fornecedores.cs
+/// Projeto:     Projeto (POO - IPCA 2025/26)
+/// Autor:       Tomás Afonso Cerqueira Gomes nº31501
+/// Data:        2025-12-27
+/// Notas:       Trabalho prático POO – Fase 2.
+/// ============================================================================
+
+using BO;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using static Exceptions.FicheiroExcecoes;
 
 namespace Dados
 {
+    /// <summary>
+    /// Classe responsável pela gestão e persistência dos dados dos Fornecedores.
+    /// Mantém uma lista em memória de todos os fornecedores e permite a sua gravação em ficheiro.
+    /// </summary>
     [Serializable]
     public class Fornecedores
     {
-        // Lista estática para manter os dados partilhados por toda a aplicação
         private static List<Fornecedor> listaFornecedores;
 
-        // Construtor estático: corre apenas uma vez para inicializar a lista
+        #region Construtores
+        /// <summary>
+        /// Construtor estático da classe Fornecedores.
+        /// Corre apenas uma vez para inicializar a lista antes de qualquer utilização.
+        /// </summary>
         static Fornecedores()
         {
             listaFornecedores = new List<Fornecedor>();
         }
+        #endregion
 
-        // Adicionar um novo fornecedor
+        #region Métodos
+        /// <summary>
+        /// Adiciona um novo fornecedor à lista, verificando se é válido e se não é duplicado.
+        /// </summary>
+        /// <param name="f">Objeto do tipo Fornecedor a adicionar.</param>
+        /// <returns>
+        /// Retorna <c>true</c> se o fornecedor for adicionado com sucesso;
+        /// Retorna <c>false</c> se o objeto for nulo ou se já existir na lista.
+        /// </returns>
         public static bool AdicionarFornecedor(Fornecedor f)
         {
             if (f == null) return false;
-            // Podes adicionar validação para não repetir NIF ou Nome
+
+            // Verifica se o fornecedor já existe (baseado no Equals do objeto)
             if (listaFornecedores.Contains(f)) return false;
 
             listaFornecedores.Add(f);
             return true;
         }
 
-        // Gravar a lista de fornecedores em ficheiro
+        /// <summary>
+        /// Grava a lista atual de fornecedores num ficheiro binário.
+        /// </summary>
+        /// <param name="caminho">O caminho ou nome do ficheiro de destino (ex: "fornecedores.bin").</param>
+        /// <returns>Retorna <c>true</c> se a gravação for concluída com sucesso.</returns>
+        /// <exception cref="FicheiroException">
+        /// Lançada caso ocorra um erro de I/O ou serialização durante o processo de gravação.
+        /// </exception>
         public static bool GravarFicheiro(string caminho)
         {
             try
@@ -37,44 +70,16 @@ namespace Dados
                 Stream stream = File.Open(caminho, FileMode.Create);
                 BinaryFormatter bin = new BinaryFormatter();
 
-                // Serializamos a lista estática diretamente
                 bin.Serialize(stream, listaFornecedores);
 
                 stream.Close();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return false;
+                throw new FicheiroException("Não foi possível gravar", e);
             }
         }
-        /*
-        // Adicionei este método pois vais precisar de carregar os dados quando o programa abre
-        public bool LerFicheiro(string caminho)
-        {
-            try
-            {
-                if (!File.Exists(caminho)) return false;
-
-                Stream stream = File.Open(caminho, FileMode.Open);
-                BinaryFormatter bin = new BinaryFormatter();
-
-                // Deserializamos para a lista estática
-                listaFornecedores = (List<Fornecedor>)bin.Deserialize(stream);
-
-                stream.Close();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        // Método auxiliar para obteres a lista se precisares de a mostrar na UI
-        public List<Fornecedor> ObterLista()
-        {
-            return new List<Fornecedor>(listaFornecedores);
-        }*/
+        #endregion
     }
 }

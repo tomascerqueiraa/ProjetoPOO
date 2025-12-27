@@ -1,4 +1,12 @@
-﻿using System;
+﻿/// ============================================================================
+/// Ficheiro:    Servico.cs
+/// Projeto:     Projeto (POO - IPCA 2025/26)
+/// Autor:       Tomás Afonso Cerqueira Gomes nº31501
+/// Data:        2025-11-13
+/// Notas:       Trabalho prático POO – Fase 2.
+/// ============================================================================
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,6 +45,25 @@ namespace BO
             set { this.custo = value; }
         }
 
+        #endregion
+
+        #region Construtor
+        public Servico(string nome, string descricao, float custo)
+        {
+            this.Nome = nome;
+            this.Descricao = descricao;
+            this.Custo = custo;
+        }
+        #endregion
+
+        #region Métodos
+        /// <summary>
+        /// Método estático para criar um novo Serviço.
+        /// </summary>
+        public static Servico CriarServico(string nome, string descricao, float custo)
+        {
+            return new Servico(nome, descricao, custo);
+        }
         #endregion
     }
 }

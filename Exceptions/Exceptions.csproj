@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0401005E-B4B6-4F54-96AF-66DC2CCAA201}</ProjectGuid>
+    <ProjectGuid>{F8FD06A3-E952-41B1-9D4B-77A024B9DA96}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GestaoObrasLib</RootNamespace>
-    <AssemblyName>GestaoObrasLib</AssemblyName>
+    <RootNamespace>Exceptions</RootNamespace>
+    <AssemblyName>Exceptions</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,20 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Modelo\AbsObra.cs" />
-    <Compile Include="Modelo\AbsOrcamento.cs" />
-    <Compile Include="Modelo\Fornecedor.cs" />
-    <Compile Include="Modelo\Funcionario.cs" />
-    <Compile Include="Modelo\Material.cs" />
-    <Compile Include="Modelo\Obra.cs" />
-    <Compile Include="Modelo\Orcamento.cs" />
-    <Compile Include="Modelo\Servico.cs" />
+    <Compile Include="FicheiroExcecoes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dados\" />
-    <Folder Include="Regras\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

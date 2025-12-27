@@ -1,4 +1,12 @@
-﻿using System;
+﻿/// ============================================================================
+/// Ficheiro:    Orcamento.cs
+/// Projeto:     Projeto (POO - IPCA 2025/26)
+/// Autor:       Tomás Afonso Cerqueira Gomes nº31501
+/// Data:        2025-12-27
+/// Notas:       Trabalho prático POO – Fase 2.
+/// ============================================================================
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -16,9 +24,9 @@ namespace BO
         private float custoServicos;
         private float custoMaoDeObra;
         private float custoTotal;
-        public List<Material> listaMateriais;
-        public List<Servico> listaServicos;
-        public List<Funcionario> listaFuncionarios;
+        private List<Material> listaMateriais;
+        private List<Servico> listaServicos;
+        private List<Funcionario> listaFuncionarios;
         #endregion
 
         #region Propriedades
@@ -76,7 +84,72 @@ namespace BO
             get { return this.custoTotal; }
             set { this.custoTotal = value; }
         }
+
+        public List<Material> ListaMateriais
+        {
+            get { return this.listaMateriais; }
+            set { this.listaMateriais = value; }
+        }
+
+        /// <summary>
+        /// Obtém ou define a lista de serviços associados à obra.
+        /// </summary>
+        public List<Servico> ListaServicos
+        {
+            get { return this.listaServicos; }
+            set { this.listaServicos = value; }
+        }
+
+        /// <summary>
+        /// Obtém ou define a lista de funcionários alocados à obra.
+        /// </summary>
+        public List<Funcionario> ListaFuncionarios
+        {
+            get { return this.listaFuncionarios; }
+            set { this.listaFuncionarios = value; }
+        }
         #endregion
-    
+
+        #region Construtor
+        public Orcamento()
+        {
+            // Inicialização obrigatória das listas para evitar erros
+            this.listaMateriais = new List<Material>();
+            this.listaServicos = new List<Servico>();
+            this.listaFuncionarios = new List<Funcionario>();
+        }
+
+        /// <summary>
+        /// Construtor para criar um orçamento novo.
+        /// </summary>
+        /// <param name="codigo">Código único do orçamento.</param>
+        /// <param name="data">Data de emissão.</param>
+        public Orcamento(string codigo, DateTime data)
+        {
+            this.Codigo = codigo;
+            this.DataCriacao = data;
+
+            // Inicializa custos a zero
+            this.CustoTotal = 0;
+            this.CustoMateriais = 0;
+            this.CustoServicos = 0;
+            this.CustoMaoDeObra = 0;
+
+            // Inicializa as listas
+            this.listaMateriais = new List<Material>();
+            this.listaServicos = new List<Servico>();
+            this.listaFuncionarios = new List<Funcionario>();
+        }
+        #endregion
+
+        #region Métodos
+        /// <summary>
+        /// Método estático para gerar um novo Orçamento.
+        /// </summary>
+        public static Orcamento CriarOrcamento(string codigo, DateTime data)
+        {
+            return new Orcamento(codigo, data);
+        }
+        #endregion
     }
 }
