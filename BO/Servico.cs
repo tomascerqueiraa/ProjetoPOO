@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    [Serializable]
     public class Servico
     {
         #region Atributos

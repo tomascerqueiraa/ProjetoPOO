@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    [Serializable]
     public class Funcionario
     {
         #region Atributos

@@ -23,7 +23,7 @@ namespace GestaoObraApp
             try
             {
                 // -----------------------------------------------------------
-                // 1. CRIAR DADOS GLOBAIS (O "Armazém")
+                // 1. CRIAR DADOS
                 // -----------------------------------------------------------
                 Console.WriteLine("\n[1] A Inicializar Catálogos (Materiais e Funcionários)...");
 
@@ -40,7 +40,7 @@ namespace GestaoObraApp
 
                 // Criar Funcionário
                 Funcionario func1 = Funcionario.CriarFuncionario("Manuel Silva", "Pedreiro", 10.0f);
-                RegrasFuncionarios.RegistarFuncionario(func1); // (Assumindo que o método se chama Registar ou Inserir)
+                RegrasFuncionarios.RegistarFuncionario(func1);
                 Console.WriteLine(" -> Funcionário registado com sucesso.");
 
 
@@ -53,7 +53,7 @@ namespace GestaoObraApp
                 DateTime inicio = DateTime.Now;
                 DateTime fim = DateTime.Now.AddMonths(3);
 
-                // Usar a Factory do BO
+                //criar obra
                 Obra minhaObra = Obra.CriarObra("Reconstrução Vivenda T3", "Braga, Centro", inicio, fim);
 
                 // Tentar validar e inserir a obra
@@ -68,8 +68,7 @@ namespace GestaoObraApp
                 // -----------------------------------------------------------
                 Console.WriteLine("\n[3] A adicionar Materiais e Mão de Obra à Obra...");
 
-                // Adicionar 10 sacos de cimento (Simulação: adicionamos o objeto 10 vezes ou criamos lógica de quantidade)
-                // Como a tua classe Material não tem quantidade, adicionamos o objeto à lista várias vezes ou assume-se unidade.
+                // Adicionar sacos de cimento
                 minhaObra.AdicionarMaterial(mat1); // +5.50
                 minhaObra.AdicionarMaterial(mat3); // +15.00
 
@@ -84,36 +83,20 @@ namespace GestaoObraApp
 
 
                 // -----------------------------------------------------------
-                // 4. CALCULAR CUSTOS (Polimorfismo e LINQ)
+                // 4. CALCULAR CUSTOS
                 // -----------------------------------------------------------
                 Console.WriteLine("\n[4] A calcular custos totais...");
 
                 double custoTotal = minhaObra.CalcularCustoTotal();
 
                 Console.WriteLine($" -> Custo calculado: {custoTotal:C} (Euros)");
-                // Ex: 5.50 + 15.00 + 10.00 + 500.00 = 530.50
+                // Ex: 5.50 + 15.00 + 10.00 + 500.00 = 530.5
 
 
                 // -----------------------------------------------------------
-                // 5. TESTAR EXCEÇÕES (Mostrar que o sistema é robusto)
+                // 5. Gravar em Ficheiro
                 // -----------------------------------------------------------
-                Console.WriteLine("\n[5] Teste de Erros (Validar Regras)...");
-                try
-                {
-                    Console.Write(" -> A tentar criar material com preço negativo... ");
-                    Material matMau = Material.CriarMaterial("Erro", "Mau", -10);
-                    RegrasMateriais.InserirMaterial(matMau); // Isto DEVE falhar
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"\n    [OK] O sistema bloqueou o erro: {ex.Message}");
-                }
-
-
-                // -----------------------------------------------------------
-                // 6. PERSISTÊNCIA (Gravar em Ficheiro)
-                // -----------------------------------------------------------
-                Console.WriteLine("\n[6] A gravar dados em disco...");
+                Console.WriteLine("\n[5] A gravar dados em disco...");
 
                 if (RegrasObras.Gravar("obras.bin") && RegrasMateriais.Gravar("materiais.bin"))
                 {
@@ -130,7 +113,6 @@ namespace GestaoObraApp
             }
             catch (Exception ex)
             {
-                // Catch-all para garantir que o programa não fecha mal se algo inesperado acontecer
                 Console.WriteLine($"\n❌ ERRO CRÍTICO NA DEMONSTRAÇÃO: {ex.Message}");
             }
 

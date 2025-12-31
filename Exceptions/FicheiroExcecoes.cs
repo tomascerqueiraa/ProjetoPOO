@@ -14,8 +14,8 @@ namespace Exceptions
     /// Exceção personalizada para tratar erros específicos de operações com ficheiros.
     /// Herda de ApplicationException para distinguir erros de negócio de erros de sistema (SystemException).
     /// </summary>
-    public class FicheiroExcecoes : Exception
-    {
+    //public class FicheiroExcecoes : Exception
+    //{
         public class FicheiroException : ApplicationException
         {
             /// <summary>
@@ -43,5 +43,5 @@ namespace Exceptions
             {
             }
         }
-    }
+   // }
 }

@@ -10,6 +10,7 @@ using System;
 
 namespace BO
 {
+    [Serializable]
     /// <summary>
     /// Classe abstrata que representa uma obra de construção civil.
     /// Contém os dados básicos de uma obra e métodos abstratos para adicionar materiais,
@@ -94,11 +95,6 @@ namespace BO
         /// Método que irá adicionar um funcionário à obra
         /// </summary>
         public abstract bool AdicionarFuncionario(Funcionario f);
-
-        /// <summary>
-        ///  Método que irá adicionar um orcamento à obra
-        /// </summary>
-        //protected abstract bool AdicionarOrcamento(AbsOrcamento o);
         
         #endregion
     }
