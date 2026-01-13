@@ -22,14 +22,26 @@ namespace Dados
     [Serializable]
     public class Funcionarios
     {
-        private static List<Funcionario> listaFuncionarios;
+        List<Funcionario> listaFuncionarios;
+
+        #region Propriedades
+        /// <summary>
+        /// Obtém ou define a lista de funcionarios.
+        /// </summary>
+        public List<Funcionario> ListaFuncionarios
+        {
+            get { return this.listaFuncionarios; }
+            set { this.listaFuncionarios = value; }
+        }
+
+        #endregion
 
         #region Construtores
         /// <summary>
         /// Construtor estático da classe Funcionarios.
         /// Inicializa a lista de funcionários antes de qualquer utilização.
         /// </summary>
-        static Funcionarios()
+        public Funcionarios()
         {
             listaFuncionarios = new List<Funcionario>();
         }
@@ -45,11 +57,11 @@ namespace Dados
         /// Retorna <c>true</c> se o funcionário for inserido com sucesso;
         /// Retorna <c>false</c> se o objeto fornecido for nulo.
         /// </returns>
-        public static bool AdicionarFuncionario(Funcionario f)
+        public bool AdicionarFuncionario(Funcionario f)
         {
             if (f == null) return false;
 
-            listaFuncionarios.Add(f);
+            ListaFuncionarios.Add(f);
             return true;
         }
 
@@ -61,13 +73,13 @@ namespace Dados
         /// <exception cref="FicheiroException">
         /// Lançada quando ocorre um erro de gravação (permissões, disco cheio, etc.) ou serialização.
         /// </exception>
-        public static bool GravarFicheiro(string caminho)
+        public bool GravarFicheiro(string caminho)
         {
             try
             {
                 Stream stream = File.Open(caminho, FileMode.Create);
                 BinaryFormatter bin = new BinaryFormatter();
-                bin.Serialize(stream, listaFuncionarios);
+                bin.Serialize(stream, ListaFuncionarios);
                 stream.Close();
                 return true;
             }

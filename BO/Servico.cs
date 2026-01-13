@@ -61,7 +61,7 @@ namespace BO
         /// <summary>
         /// Método estático para criar um novo Serviço.
         /// </summary>
-        public static Servico CriarServico(string nome, string descricao, float custo)
+        public Servico CriarServico(string nome, string descricao, float custo)
         {
             return new Servico(nome, descricao, custo);
         }

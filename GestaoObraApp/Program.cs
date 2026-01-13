@@ -22,25 +22,30 @@ namespace GestaoObraApp
 
             try
             {
+                RegrasMateriais regrasMat = new RegrasMateriais();
+                RegrasFuncionarios regrasFunc = new RegrasFuncionarios();
+                RegrasObras regrasObra = new RegrasObras();
+
                 // -----------------------------------------------------------
                 // 1. CRIAR DADOS
                 // -----------------------------------------------------------
                 Console.WriteLine("\n[1] A Inicializar Catálogos (Materiais e Funcionários)...");
 
                 // Criar alguns materiais
-                Material mat1 = Material.CriarMaterial("Cimento", "Saco 25kg", 5.50f);
-                Material mat2 = Material.CriarMaterial("Tijolo", "Bloco térmico", 0.80f);
-                Material mat3 = Material.CriarMaterial("Areia", "Metro Cúbico", 15.0f);
+                Material mat1 = new Material("Cimento", "Saco 25kg", 5.50f);
+                Material mat2 = new Material("Tijolo", "Bloco térmico", 0.80f);
+                Material mat3 = new Material("Areia", "Metro Cúbico", 15.0f);
 
                 // Inserir no sistema (Regras valida e manda para Dados)
-                RegrasMateriais.InserirMaterial(mat1);
-                RegrasMateriais.InserirMaterial(mat2);
-                RegrasMateriais.InserirMaterial(mat3);
+                regrasMat.InserirMaterial(mat1);
+                regrasMat.InserirMaterial(mat2);
+                regrasMat.InserirMaterial(mat3);
                 Console.WriteLine(" -> Materiais criados com sucesso.");
 
                 // Criar Funcionário
-                Funcionario func1 = Funcionario.CriarFuncionario("Manuel Silva", "Pedreiro", 10.0f);
-                RegrasFuncionarios.RegistarFuncionario(func1);
+                Funcionario func1 = new Funcionario("Manuel Silva", "Pedreiro", 10.0f);
+
+                regrasFunc.RegistarFuncionario(func1);
                 Console.WriteLine(" -> Funcionário registado com sucesso.");
 
 
@@ -54,14 +59,20 @@ namespace GestaoObraApp
                 DateTime fim = DateTime.Now.AddMonths(3);
 
                 //criar obra
-                Obra minhaObra = Obra.CriarObra("Reconstrução Vivenda T3", "Braga, Centro", inicio, fim);
+                Obra minhaObra = new Obra("Reconstrução Vivenda T3", "Braga, Centro", inicio, fim);
 
                 // Tentar validar e inserir a obra
-                if (RegrasObras.NovaObra(minhaObra))
+                try
                 {
-                    Console.WriteLine($" -> Obra '{minhaObra.Nome}' criada com sucesso!");
+                    if (regrasObra.NovaObra(minhaObra))
+                    {
+                        Console.WriteLine($" -> Obra '{minhaObra.Nome}' criada com sucesso!");
+                    }
                 }
-
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Erro ao criar obra: {ex.Message}");
+                }
 
                 // -----------------------------------------------------------
                 // 3. ADICIONAR CUSTOS À OBRA
@@ -76,7 +87,7 @@ namespace GestaoObraApp
                 minhaObra.AdicionarFuncionario(func1); // +10.00
 
                 // Criar e adicionar serviço
-                Servico servPintura = Servico.CriarServico("Pintura Exterior", "Mão de obra subcontratada", 500.0f);
+                Servico servPintura = new Servico("Pintura Exterior", "Mão de obra subcontratada", 500.0f);
                 minhaObra.AdicionarServico(servPintura); // +500.00
 
                 Console.WriteLine(" -> Itens adicionados à obra.");
@@ -98,13 +109,24 @@ namespace GestaoObraApp
                 // -----------------------------------------------------------
                 Console.WriteLine("\n[5] A gravar dados em disco...");
 
-                if (RegrasObras.Gravar("obras.bin") && RegrasMateriais.Gravar("materiais.bin"))
+                try
                 {
-                    Console.WriteLine(" -> Ficheiros 'obras.bin' e 'materiais.bin' gravados com sucesso.");
+                    // Aqui usamos as instâncias regrasObra e regrasMat para chamar o Gravar
+                    bool gravouObras = regrasObra.Gravar("obras.bin");
+                    bool gravouMat = regrasMat.Gravar("materiais.bin");
+
+                    if (gravouObras && gravouMat)
+                    {
+                        Console.WriteLine(" -> Ficheiros 'obras.bin' e 'materiais.bin' gravados com sucesso.");
+                    }
+                    else
+                    {
+                        Console.WriteLine(" -> Aviso: Um dos ficheiros pode não ter sido gravado.");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    Console.WriteLine(" -> Erro ao gravar.");
+                    Console.WriteLine($" -> ERRO AO GRAVAR: {ex.Message}");
                 }
 
                 Console.WriteLine("\n=================================================");

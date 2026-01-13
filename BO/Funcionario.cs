@@ -64,9 +64,8 @@ namespace BO
         /// <summary>
         /// Método estático para criar um novo Funcionário de forma rápida.
         /// </summary>
-        public static Funcionario CriarFuncionario(string nome, string funcao, float salario)
+        public Funcionario CriarFuncionario(string nome, string funcao, float salario)
         {
-            // Cria a instância usando o construtor acima
             Funcionario novoFunc = new Funcionario(nome, funcao, salario);
             return novoFunc;
         }

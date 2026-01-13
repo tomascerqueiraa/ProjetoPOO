@@ -16,8 +16,23 @@ namespace Regras
     /// Classe responsável pela implementação das regras de negócio relativas aos Serviços.
     /// Valida os dados dos serviços (como nome e custo) antes de permitir o seu registo na base de dados.
     /// </summary>
-    public static class RegrasServicos
+    public class RegrasServicos
     {
+        // 1. Variável privada para aceder à camada de Dados
+        private Servicos dadosServicos;
+
+        public Servicos DadosServicos
+        {
+            get { return this.dadosServicos; }
+            set { this.dadosServicos = value; }
+        }
+
+        // 2. Construtor: Inicializa a lista/acesso aos dados
+        public RegrasServicos()
+        {
+            dadosServicos = new Servicos();
+        }
+
         /// <summary>
         /// Valida os dados de um serviço e, se corretos, solicita a sua inserção na camada de Dados.
         /// </summary>
@@ -26,7 +41,7 @@ namespace Regras
         /// Retorna <c>true</c> se a inserção for bem-sucedida;
         /// Retorna <c>false</c> se o objeto serviço for nulo.
         /// </returns>
-        public static bool InserirServico(Servico s)
+        public bool InserirServico(Servico s)
         {
             if (s == null) return false;
 
@@ -42,8 +57,8 @@ namespace Regras
                 throw new Exception("ERRO: O custo do serviço não pode ser negativo.");
             }
 
-            // Chama a camada Dados
-            return Servicos.AdicionarServico(s);
+            // 3. ALTERAÇÃO: Chama a instância 'dadosServicos' em vez da classe estática
+            return dadosServicos.AdicionarServico(s);
         }
 
         /// <summary>
@@ -51,9 +66,10 @@ namespace Regras
         /// </summary>
         /// <param name="caminho">O caminho ou nome do ficheiro de destino.</param>
         /// <returns>Retorna <c>true</c> se a operação for concluída com sucesso.</returns>
-        public static bool Gravar(string caminho)
+        public bool Gravar(string caminho)
         {
-            return Servicos.GravarFicheiro(caminho);
+            // 3. ALTERAÇÃO: Usa a variável 'dadosServicos'
+            return dadosServicos.GravarFicheiro(caminho);
         }
     }
 }

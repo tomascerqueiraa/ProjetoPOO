@@ -23,14 +23,14 @@ namespace Dados
     [Serializable]
     public class Materiais
     {
-        private static List<Material> listaMateriais;
+        private List<Material> listaMateriais;
 
         #region Construtores
         /// <summary>
         /// Construtor estático da classe Materiais.
         /// Inicializa a lista de materiais para que esteja pronta a ser usada.
         /// </summary>
-        static Materiais()
+        public Materiais()
         {
             listaMateriais = new List<Material>();
         }
@@ -45,7 +45,7 @@ namespace Dados
         /// Retorna <c>true</c> se o material for adicionado com sucesso;
         /// Retorna <c>false</c> se o material for nulo.
         /// </returns>
-        public static bool AdicionarMaterial(Material m)
+        public bool AdicionarMaterial(Material m)
         {
             if (m == null) return false;
             if (m == null) return false;
@@ -61,7 +61,7 @@ namespace Dados
         /// <exception cref="FicheiroException">
         /// Lançada em caso de erro no acesso ao disco ou durante a serialização.
         /// </exception>
-        public static bool  GravarFicheiro(string caminho)
+        public bool  GravarFicheiro(string caminho)
         {
             try
             {

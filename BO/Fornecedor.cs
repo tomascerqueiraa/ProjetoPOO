@@ -68,7 +68,7 @@ namespace BO
         /// <summary>
         /// Método estático para criar um novo Fornecedor.
         /// </summary>
-        public static Fornecedor CriarFornecedor(string nome, string contacto, string descricao)
+        public Fornecedor CriarFornecedor(string nome, string contacto, string descricao)
         {
             Fornecedor novoForn = new Fornecedor(nome, contacto, descricao);
             return novoForn;

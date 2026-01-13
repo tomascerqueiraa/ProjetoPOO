@@ -86,7 +86,7 @@ namespace BO
         /// <param name="inicio">Data de início.</param>
         /// <param name="fim">Data prevista de conclusão.</param>
         /// <returns>Uma nova instância da classe Obra devidamente preenchida.</returns>
-        public static Obra CriarObra(string nome, string local, DateTime inicio, DateTime fim)
+        public Obra CriarObra(string nome, string local, DateTime inicio, DateTime fim)
         {
             Obra novaObra = new Obra(nome, local, inicio, fim);
 

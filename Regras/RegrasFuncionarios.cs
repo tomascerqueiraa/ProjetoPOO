@@ -16,8 +16,23 @@ namespace Regras
     /// Classe responsável pela implementação das regras de negócio relativas aos Funcionários.
     /// Valida os dados pessoais e contratuais dos colaboradores antes de permitir o seu registo.
     /// </summary>
-    public static class RegrasFuncionarios
+    public class RegrasFuncionarios
     {
+        // 1. Variável privada para aceder à camada de Dados (instância)
+        private Funcionarios dadosFuncionarios;
+
+        public Funcionarios DadosFuncionarios
+        {
+            get { return this.dadosFuncionarios; }
+            set { this.dadosFuncionarios = value; }
+        }
+
+        // 2. Construtor: Inicializa a lista/acesso aos dados
+        public RegrasFuncionarios()
+        {
+            dadosFuncionarios = new Funcionarios();
+        }
+
         /// <summary>
         /// Valida os dados de um novo funcionário e, se corretos, solicita o registo na camada de Dados.
         /// </summary>
@@ -26,7 +41,7 @@ namespace Regras
         /// Retorna <c>true</c> se o funcionário for registado com sucesso;
         /// Retorna <c>false</c> se o objeto fornecido for nulo.
         /// </returns>
-        public static bool RegistarFuncionario(Funcionario f)
+        public bool RegistarFuncionario(Funcionario f)
         {
             // 1. Validações
             if (f == null) return false;
@@ -49,7 +64,8 @@ namespace Regras
                 throw new Exception("ERRO: O salário deve ser um valor positivo.");
             }
 
-            return Funcionarios.AdicionarFuncionario(f);
+            // 3. ALTERAÇÃO: Usa a variável 'dadosFuncionarios' em vez da classe estática
+            return dadosFuncionarios.AdicionarFuncionario(f);
         }
 
         /// <summary>
@@ -57,9 +73,13 @@ namespace Regras
         /// </summary>
         /// <param name="caminho">O caminho ou nome do ficheiro de destino.</param>
         /// <returns>Retorna <c>true</c> se a operação for concluída com sucesso.</returns>
-        public static bool Gravar(string caminho)
+        public bool Gravar(string caminho)
         {
-            return Funcionarios.GravarFicheiro(caminho);
+            // Valida o caminho antes de enviar
+            if (string.IsNullOrEmpty(caminho)) return false;
+
+            // 3. ALTERAÇÃO: Usa a variável 'dadosFuncionarios'
+            return dadosFuncionarios.GravarFicheiro(caminho);
         }
     }
 }

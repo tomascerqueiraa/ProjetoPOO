@@ -6,9 +6,10 @@
 /// Notas:       Trabalho prático POO – Fase 2.
 /// ============================================================================
 
-using System;
 using BO;
 using Dados;
+using System;
+using System.Collections.Generic;
 
 namespace Regras
 {
@@ -18,6 +19,22 @@ namespace Regras
     /// </summary>
     public class RegrasMateriais
     {
+
+        // 1. Variável para guardar a "ligação" aos dados
+        private Materiais dadosMateriais;
+
+        // 2. A Propriedade Pública
+        public Materiais DadosMateriais
+        {
+            get { return this.dadosMateriais; }
+            set { this.dadosMateriais = value; }
+        }
+        // 2. Construtor: Inicializa a lista de materiais quando crias as Regras
+        public RegrasMateriais()
+        {
+            dadosMateriais = new Materiais();
+        }
+
         /// <summary>
         /// Valida e solicita a inserção de um novo material no catálogo da empresa.
         /// </summary>
@@ -26,13 +43,13 @@ namespace Regras
         /// Retorna <c>true</c> se a inserção for bem-sucedida;
         /// Retorna <c>false</c> se o material for nulo ou se a camada de dados rejeitar a operação.
         /// </returns>
-        public static bool InserirMaterial(Material m)
+        public bool InserirMaterial(Material m)
         {
             // 1. Validações
             if (m == null) return false;
 
-            // 2. Chama diretamente o método estático da camada Dados
-            bool suc = Materiais.AdicionarMaterial(m);
+            // 3. ALTERAÇÃO: Usa a variável 'dadosMateriais' em vez da classe
+            bool suc = dadosMateriais.AdicionarMaterial(m);
             return suc;
         }
 
@@ -44,12 +61,13 @@ namespace Regras
         /// Retorna <c>true</c> se a gravação ocorrer com sucesso;
         /// Retorna <c>false</c> se o caminho fornecido for inválido.
         /// </returns>
-        public static bool Gravar(string caminho)
+        public bool Gravar(string caminho)
         {
             // Valida se o caminho é válido antes de mandar gravar
             if (string.IsNullOrEmpty(caminho)) return false;
 
-            return Materiais.GravarFicheiro(caminho);
+            // 3. ALTERAÇÃO: Usa a variável 'dadosMateriais'
+            return dadosMateriais.GravarFicheiro(caminho);
         }
     }
 }

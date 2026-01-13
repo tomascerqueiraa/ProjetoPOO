@@ -16,8 +16,23 @@ namespace Regras
     /// Classe responsável pela implementação das regras de negócio relativas às Obras.
     /// Valida os dados fundamentais de uma obra (nome, local, datas) antes de permitir o seu registo.
     /// </summary>
-    public static class RegrasObras
+    public class RegrasObras
     {
+        // 1. Variável privada para aceder à camada de Dados (instância)
+        private Obras dadosObras;
+
+        public Obras DadosObras
+        {
+            get { return this.dadosObras; }
+            set { this.dadosObras = value; }
+        }
+
+        // 2. Construtor: Inicializa a lista/acesso aos dados
+        public RegrasObras()
+        {
+            dadosObras = new Obras();
+        }
+
         /// <summary>
         /// Valida os dados de uma nova obra e, se cumprirem as regras, submete-a para registo na camada de Dados.
         /// </summary>
@@ -26,7 +41,7 @@ namespace Regras
         /// Retorna <c>true</c> se a obra for inserida com sucesso;
         /// Retorna <c>false</c> se o objeto obra for nulo ou se a inserção na camada de dados falhar (ex: duplicado).
         /// </returns>
-        public static bool NovaObra(Obra o)
+        public bool NovaObra(Obra o)
         {
             if (o == null) return false;
 
@@ -48,8 +63,8 @@ namespace Regras
                 throw new Exception("ERRO: A data de conclusão prevista não pode ser anterior à data de início.");
             }
 
-            // Chama a camada Dados para inserir
-            return Obras.InsereObra(o);
+            // 3. ALTERAÇÃO: Chama a instância 'dadosObras' em vez da classe estática
+            return dadosObras.InsereObra(o);
         }
 
         /// <summary>
@@ -57,9 +72,10 @@ namespace Regras
         /// </summary>
         /// <param name="caminho">O caminho ou nome do ficheiro de destino.</param>
         /// <returns>Retorna <c>true</c> se a operação for concluída com sucesso.</returns>
-        public static bool Gravar(string caminho)
+        public bool Gravar(string caminho)
         {
-            return Obras.GravarFicheiro(caminho);
+            // 3. ALTERAÇÃO: Usa a variável 'dadosObras'
+            return dadosObras.GravarFicheiro(caminho);
         }
     }
 }

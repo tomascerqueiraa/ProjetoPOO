@@ -22,14 +22,14 @@ namespace Dados
     [Serializable]
     public class Fornecedores
     {
-        private static List<Fornecedor> listaFornecedores;
+        private List<Fornecedor> listaFornecedores;
 
         #region Construtores
         /// <summary>
         /// Construtor estático da classe Fornecedores.
         /// Corre apenas uma vez para inicializar a lista antes de qualquer utilização.
         /// </summary>
-        static Fornecedores()
+        public Fornecedores()
         {
             listaFornecedores = new List<Fornecedor>();
         }
@@ -44,7 +44,7 @@ namespace Dados
         /// Retorna <c>true</c> se o fornecedor for adicionado com sucesso;
         /// Retorna <c>false</c> se o objeto for nulo ou se já existir na lista.
         /// </returns>
-        public static bool AdicionarFornecedor(Fornecedor f)
+        public bool AdicionarFornecedor(Fornecedor f)
         {
             if (f == null) return false;
 
@@ -63,7 +63,7 @@ namespace Dados
         /// <exception cref="FicheiroException">
         /// Lançada caso ocorra um erro de I/O ou serialização durante o processo de gravação.
         /// </exception>
-        public static bool GravarFicheiro(string caminho)
+        public bool GravarFicheiro(string caminho)
         {
             try
             {

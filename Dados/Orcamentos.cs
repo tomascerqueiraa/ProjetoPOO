@@ -22,14 +22,14 @@ namespace Dados
     [Serializable]
     public class Orcamentos
     {
-        private static List<Orcamento> listaOrcamentos;
+        private List<Orcamento> listaOrcamentos;
 
         #region Construtores
         /// <summary>
         /// Construtor estático da classe Orcamentos.
         /// Inicializa a lista de orçamentos para garantir que não está nula ao arrancar.
         /// </summary>
-        static Orcamentos()
+        public Orcamentos()
         {
             listaOrcamentos = new List<Orcamento>();
         }
@@ -45,7 +45,7 @@ namespace Dados
         /// Retorna <c>false</c> se o objeto fornecido for nulo.
         /// </returns>
         // Adicionar um orçamento
-        public static bool AdicionarOrcamento(Orcamento o)
+        public bool AdicionarOrcamento(Orcamento o)
         {
             if (o == null) return false;
 
@@ -62,7 +62,7 @@ namespace Dados
         /// Lançada quando ocorrem erros de I/O (escrita) ou de serialização.
         /// A exceção original é preservada dentro desta exceção personalizada.
         /// </exception>
-        public static bool GravarFicheiro(string caminho)
+        public bool GravarFicheiro(string caminho)
         {
             try
             {

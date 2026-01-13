@@ -22,14 +22,14 @@ namespace Dados
     [Serializable]
     public class Obras
     {
-        static List<Obra> ListaObras;
+        List<Obra> ListaObras;
 
         #region Construtores
         /// <summary>
         /// Construtor estático da classe Obras.
         /// Inicializa a lista de obras vazia para evitar referências nulas.
         /// </summary>
-        static Obras()
+        public Obras()
         {
             ListaObras = new List<Obra>();
         }
@@ -45,7 +45,7 @@ namespace Dados
         /// Retorna <c>true</c> se a obra for inserida com sucesso;
         /// Retorna <c>false</c> se a obra já existir na lista.
         /// </returns>
-        public static bool InsereObra(Obra a)
+        public bool InsereObra(Obra a)
         {
             if (ListaObras.Contains(a)) return false;
 
@@ -62,7 +62,7 @@ namespace Dados
         /// Lançada em caso de erro de acesso ao ficheiro ou falha na serialização.
         /// </exception>
 
-        public static bool GravarFicheiro(string caminho)
+        public bool GravarFicheiro(string caminho)
         {
             try
             {

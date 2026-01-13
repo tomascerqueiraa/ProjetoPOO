@@ -63,7 +63,7 @@ namespace BO
         /// <summary>
         /// Método estático para criar um novo Material validado.
         /// </summary>
-        public static Material CriarMaterial(string nome, string descricao, float custo)
+        public Material CriarMaterial(string nome, string descricao, float custo)
         {
             return new Material(nome, descricao, custo);
         }

@@ -26,14 +26,14 @@ namespace Dados
     [Serializable]
     public class Servicos
     {
-        private static List<Servico> listaServicos;
+        private List<Servico> listaServicos;
 
         #region Construtores
         /// <summary>
         /// Construtor estático da classe Servicos.
         /// Inicializa a lista de serviços antes de qualquer membro estático ser acedido.
         /// </summary>
-        static Servicos()
+        public Servicos()
         {
             listaServicos = new List<Servico>();
         }
@@ -48,7 +48,7 @@ namespace Dados
         /// Retorna <c>true</c> se o serviço for adicionado com sucesso; 
         /// Retorna <c>false</c> se o serviço fornecido for nulo.
         /// </returns>
-        public static bool AdicionarServico(Servico s)
+        public bool AdicionarServico(Servico s)
         {
             if (s == null) return false;
             listaServicos.Add(s);
@@ -61,7 +61,7 @@ namespace Dados
         /// <param name="caminho">O caminho (path) ou nome do ficheiro onde os dados serão guardados.</param>
         /// <returns>Retorna <c>true</c> se a gravação for bem-sucedida.</returns>
         /// <exception cref="FicheiroException">Lançada caso ocorra um erro de I/O ou serialização durante a gravação.</exception>
-        public static bool GravarFicheiro(string caminho)
+        public bool GravarFicheiro(string caminho)
         {
             try
             {

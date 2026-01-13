@@ -147,7 +147,7 @@ namespace BO
         /// <summary>
         /// Método estático para gerar um novo Orçamento.
         /// </summary>
-        public static Orcamento CriarOrcamento(string codigo, DateTime data)
+        public Orcamento CriarOrcamento(string codigo, DateTime data)
         {
             return new Orcamento(codigo, data);
         }
